@@ -27,6 +27,12 @@ const Row = styled(motion.div)`
   grid-template-columns: repeat(6, 1fr);
   position: absolute;
   width: 100%;
+  div:first-child {
+    transform-origin: center left;
+  }
+  div:last-child {
+    transform-origin: center right;
+  }
 `;
 
 const Item = styled(motion.div)<{ $bgPhoto: string }>`
@@ -38,12 +44,6 @@ const Item = styled(motion.div)<{ $bgPhoto: string }>`
     url(${process.env.PUBLIC_URL}/No_Image.png);
   background-size: cover;
   background-position: center center;
-  &:first-child {
-    transform-origin: center left;
-  }
-  &:last-child {
-    transform-origin: center right;
-  }
 `;
 
 const Info = styled(motion.div)`
