@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { makeImagePath } from "../utils";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import StarRating from "./StarRating";
 
 interface SliderItem {
@@ -35,7 +35,7 @@ const Item = styled(motion.div)<{ $bgPhoto: string }>`
   color: ${(props) => props.theme.white.lighter};
   font-size: 20px;
   background-image: url(${({ $bgPhoto }) => $bgPhoto}),
-    url("https://via.placeholder.com/200");
+    url(${process.env.PUBLIC_URL}/No_Image.png);
   background-size: cover;
   background-position: center center;
   &:first-child {
@@ -142,6 +142,10 @@ function Slider<T extends SliderItem>({
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const [direction, setDirection] = useState(1);
+  const searchMatch = useRouteMatch("/search");
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const keyword = params.get("keyword");
 
   const increaseIndex = () => {
     if (leaving) return;
@@ -162,7 +166,11 @@ function Slider<T extends SliderItem>({
   };
 
   const onItemClick = (id: number) => {
-    history.push(`/${type}/${category}/${id}`);
+    if (searchMatch && keyword)
+      history.push(
+        `?keyword=${keyword}&type=${type}&category=${category}&id=${id}`
+      );
+    else history.push(`?type=${type}&category=${category}&id=${id}`);
   };
 
   return (

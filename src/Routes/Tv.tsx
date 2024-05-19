@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { getShows, IGetShowsResult, ITv } from "../api";
 import { makeImagePath } from "../utils";
 import Slider from "../Components/Slider";
-import { useRouteMatch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Detail from "../Components/Detail"; // Adjust the import path as needed
 
 const Wrapper = styled.div`
@@ -73,10 +73,11 @@ function Tv() {
     isTopRatedLoading ||
     isUpcomingLoading ||
     isUpcomingLoading2;
-
-  const match = useRouteMatch<{ category: string; id: string }>(
-    `/tv/:category/:id`
-  );
+  const location = useLocation();
+  const { search } = location;
+  const params = new URLSearchParams(search);
+  const id = params.get("id");
+  const category = params.get("category");
   return (
     <Wrapper>
       {isLoading ? (
@@ -127,13 +128,7 @@ function Tv() {
               offset={6}
             />
           </SliderWrapper>
-          {match && (
-            <Detail
-              type="tv"
-              id={match.params.id}
-              category={match.params.category}
-            />
-          )}
+          {id && category && <Detail type="tv" id={id} category={category} />}
         </>
       )}
     </Wrapper>

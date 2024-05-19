@@ -141,11 +141,11 @@ const SliderTitle = styled.h3`
 `;
 
 function Detail({ type, category, id }: IDetailParams) {
-  const match = useRouteMatch("/:type/:category/:id");
   const history = useHistory();
+  const match = useRouteMatch("/search");
   const onOverlayClick = () => {
-    const { type } = match?.params as IDetailParams;
-    if (type) history.push(`/${type}`);
+    if (match) history.goBack();
+    else if (type && type !== "movie") history.push(`/${type}`);
     else history.push("/");
   };
   const { data: detail } = useQuery<IGetShowDetailResult>(
@@ -175,8 +175,14 @@ function Detail({ type, category, id }: IDetailParams) {
               }}
             >
               <BigTitle>
-                {detail.title ?? detail.name}&nbsp;(
-                {(detail.release_date || detail.first_air_date).slice(0, 4)})
+                {detail.title ?? detail.name}
+                {(detail.release_date || detail.first_air_date) && (
+                  <span>
+                    {" ("}
+                    {(detail.release_date || detail.first_air_date).slice(0, 4)}
+                    {")"}
+                  </span>
+                )}
               </BigTitle>
               {detail.original_title && (
                 <SubTitle>{detail.original_title} </SubTitle>
