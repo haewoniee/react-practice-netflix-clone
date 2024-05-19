@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { getShows, IGetShowsResult, ITv } from "../api";
 import { makeImagePath } from "../utils";
 import Slider from "../Components/Slider";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Detail from "../Components/Detail"; // Adjust the import path as needed
 
 const Wrapper = styled.div`
@@ -19,6 +19,7 @@ const Loader = styled.div`
 `;
 
 const Banner = styled.div<{ $bgPhoto: string }>`
+  cursor: pointer;
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -56,6 +57,7 @@ const SliderTitle = styled.h3`
 `;
 
 function Tv() {
+  const history = useHistory();
   const { data: nowPlayingTv, isLoading: isNowPlayingLoading } = useQuery<
     IGetShowsResult<ITv>
   >(["movies", "on_the_air"], () => getShows("tv", "on_the_air"));
@@ -78,6 +80,11 @@ function Tv() {
   const params = new URLSearchParams(search);
   const id = params.get("id");
   const category = params.get("category");
+  const onClickBanner = () => {
+    history.push(
+      `?type=movie&category=now_playing&id=${nowPlayingTv?.results[0].id}`
+    );
+  };
   return (
     <Wrapper>
       {isLoading ? (
@@ -88,6 +95,7 @@ function Tv() {
             $bgPhoto={makeImagePath(
               nowPlayingTv?.results[0].backdrop_path || ""
             )}
+            onClick={onClickBanner}
           >
             <Title>{nowPlayingTv?.results[0].name}</Title>
             <Overview>{nowPlayingTv?.results[0].overview}</Overview>

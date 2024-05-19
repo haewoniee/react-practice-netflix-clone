@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { getShows, IGetShowsResult, IMovie } from "../api";
 import { makeImagePath } from "../utils";
 import Slider from "../Components/Slider";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Detail from "../Components/Detail"; // Adjust the import path as needed
 
 const Wrapper = styled.div`
@@ -19,6 +19,7 @@ const Loader = styled.div`
 `;
 
 const Banner = styled.div<{ $bgPhoto: string }>`
+  cursor: pointer;
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -56,6 +57,7 @@ const SliderTitle = styled.h3`
 `;
 
 function Home() {
+  const history = useHistory();
   const { data: nowPlayingMovies, isLoading: isNowPlayingLoading } = useQuery<
     IGetShowsResult<IMovie>
   >(["movies", "nowPlaying"], () => getShows("movie", "now_playing"));
@@ -72,6 +74,11 @@ function Home() {
   const params = new URLSearchParams(search);
   const id = params.get("id");
   const category = params.get("category");
+  const onClickBanner = () => {
+    history.push(
+      `?type=movie&category=now_playing&id=${nowPlayingMovies?.results[0].id}`
+    );
+  };
   return (
     <Wrapper>
       {isLoading ? (
@@ -82,6 +89,7 @@ function Home() {
             $bgPhoto={makeImagePath(
               nowPlayingMovies?.results[0].backdrop_path || ""
             )}
+            onClick={onClickBanner}
           >
             <Title>{nowPlayingMovies?.results[0].title}</Title>
             <Overview>{nowPlayingMovies?.results[0].overview}</Overview>
