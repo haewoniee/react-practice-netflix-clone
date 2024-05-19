@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/react-practice-netflix-clone/static/js/main.2ac11ede.js",
+    "main.js": "/react-practice-netflix-clone/static/js/main.792f6709.js",
     "index.html": "/react-practice-netflix-clone/index.html",
-    "main.2ac11ede.js.map": "/react-practice-netflix-clone/static/js/main.2ac11ede.js.map"
+    "main.792f6709.js.map": "/react-practice-netflix-clone/static/js/main.792f6709.js.map"
   },
   "entrypoints": [
-    "static/js/main.2ac11ede.js"
+    "static/js/main.792f6709.js"
   ]
 }
