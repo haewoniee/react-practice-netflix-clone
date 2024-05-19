@@ -28,10 +28,10 @@ const Row = styled(motion.div)`
   position: absolute;
   width: 100%;
   div:first-child {
-    transform-origin: center left;
+    transform-origin: center left !important;
   }
   div:last-child {
-    transform-origin: center right;
+    transform-origin: center right !important;
   }
 `;
 

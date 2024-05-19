@@ -219,7 +219,7 @@ function Detail({ type, category, id }: IDetailParams) {
             >
               {similarShows?.results && similarShows.results.length > 0 && (
                 <>
-                  <SliderTitle>SIMIAR SHOWS</SliderTitle>
+                  <SliderTitle>비슷한 작품들</SliderTitle>
                   <Slider
                     showButtons={false}
                     key="topRated"
