@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { makeImagePath } from "../utils";
 import styled from "styled-components";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   IGetShowDetailResult,
   IGetShowsResult,
@@ -142,9 +142,11 @@ const SliderTitle = styled.h3`
 
 function Detail({ type, category, id }: IDetailParams) {
   const history = useHistory();
-  const match = useRouteMatch("/search");
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const keyword = params.get("keyword");
   const onOverlayClick = () => {
-    if (match) history.goBack();
+    if (keyword) history.push(`/search?keyword=${keyword}`);
     else if (type && type !== "movie") history.push(`/${type}`);
     else history.push("/");
   };
