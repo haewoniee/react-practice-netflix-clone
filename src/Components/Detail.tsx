@@ -196,7 +196,7 @@ function Detail({ type, category, id }: IDetailParams) {
                   {detail.adult ? "18+" : "All"}
                 </Grade>
                 <GenreList>
-                  <GenreLabel>Genres:</GenreLabel>
+                  <GenreLabel>장르:</GenreLabel>
                   {detail.genres?.map((genre) => (
                     <span key={genre.id}>{genre.name}</span>
                   ))}
