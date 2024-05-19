@@ -92,16 +92,7 @@ function Tv() {
             <Overview>{nowPlayingTv?.results[0].overview}</Overview>
           </Banner>
           <SliderWrapper>
-            <SliderTitle>LATEST SHOWS</SliderTitle>
-            <Slider
-              category="on_the_air"
-              type="tv"
-              list={nowPlayingTv?.results.slice(1) ?? []}
-              offset={6}
-            />
-          </SliderWrapper>
-          <SliderWrapper>
-            <SliderTitle>AIRING TODAY</SliderTitle>
+            <SliderTitle>지금 방영 중</SliderTitle>
             <Slider
               type="tv"
               category="airing_today"
@@ -110,7 +101,16 @@ function Tv() {
             />
           </SliderWrapper>
           <SliderWrapper>
-            <SliderTitle>POPULAR</SliderTitle>
+            <SliderTitle>7일 안에 방영 예정작</SliderTitle>
+            <Slider
+              category="on_the_air"
+              type="tv"
+              list={nowPlayingTv?.results.slice(1) ?? []}
+              offset={6}
+            />
+          </SliderWrapper>
+          <SliderWrapper>
+            <SliderTitle>가장 인기있는 시리즈</SliderTitle>
             <Slider
               type="tv"
               category="popular"
@@ -119,7 +119,7 @@ function Tv() {
             />
           </SliderWrapper>
           <SliderWrapper>
-            <SliderTitle>TOP RATED</SliderTitle>
+            <SliderTitle>가장 높은 별점</SliderTitle>
             <Slider
               type="tv"
               category="top_rated"

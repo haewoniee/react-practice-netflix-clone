@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { makeImagePath } from "../utils";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import {
   IGetShowDetailResult,
   IGetShowsResult,
@@ -141,9 +141,12 @@ const SliderTitle = styled.h3`
 `;
 
 function Detail({ type, category, id }: IDetailParams) {
+  const match = useRouteMatch("/:type/:category/:id");
   const history = useHistory();
   const onOverlayClick = () => {
-    history.push("/");
+    const { type } = match?.params as IDetailParams;
+    if (type) history.push(`/${type}`);
+    else history.push("/");
   };
   const { data: detail } = useQuery<IGetShowDetailResult>(
     ["detail", type, id],

@@ -87,7 +87,7 @@ function Home() {
             <Overview>{nowPlayingMovies?.results[0].overview}</Overview>
           </Banner>
           <SliderWrapper>
-            <SliderTitle>NOW PLAYING</SliderTitle>
+            <SliderTitle>지금 방영 중</SliderTitle>
             <Slider
               key="nowPlaying"
               type="movie"
@@ -97,7 +97,7 @@ function Home() {
             />
           </SliderWrapper>
           <SliderWrapper>
-            <SliderTitle>TOP RATED</SliderTitle>
+            <SliderTitle>가장 높은 별점</SliderTitle>
             <Slider
               key="topRated"
               type="movie"
@@ -107,7 +107,7 @@ function Home() {
             />
           </SliderWrapper>
           <SliderWrapper>
-            <SliderTitle>UPCOMING</SliderTitle>
+            <SliderTitle>방영 예정작</SliderTitle>
             <Slider
               key="upcoming"
               type="movie"
