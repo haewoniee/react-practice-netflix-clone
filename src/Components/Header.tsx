@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Nav = styled.nav`
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
